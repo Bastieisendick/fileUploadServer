@@ -1,0 +1,28 @@
+body {
+	font: 13px Verdana;
+	background: #eee;
+	color: #333
+}
+
+.heading {
+	font-family: "Arial";
+	font-size: 7rem;
+	color: rgb(80,140,255);
+	align-items: center;
+	position: relative;
+}
+
+.uploadButtonClass {
+	font-size: 3rem;
+	border-radius: 7px;
+	border-color: rgb(40,250,60);
+	margin-bottom: 4rem;
+}
+
+.startUploadButtonClass {
+	font-size: 3rem;
+	color: rgb(40,250,60);
+	border-radius: 7px;
+	border-color: rgb(40,250,60);
+	background-color: rgb(80,140,255);
+}
