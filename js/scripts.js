@@ -2,12 +2,15 @@ let filters = {};				//{max_file_size : '10mb',mime_types: [{title : "Image file
 
 let uploader = new plupload.Uploader(
 	{
-		runtimes : 'html5,flash,silverlight,html4',
+		runtimes : 'html5,silverlight,html4',
 		
 		browse_button : 'uploadButton',
 		container: document.getElementById('buttonContainer'),
 		
 		url : 'fileUpload.php',
+
+		chunk_size: '1024000',
+		max_retries: 10,
 		
 		flash_swf_url : 'plupload/Moxie.swf',
 		silverlight_xap_url : 'plupload/Moxie.xap',
@@ -26,12 +29,12 @@ let uploader = new plupload.Uploader(
 
 			FilesAdded: function(up, files) {
 				plupload.each(files, function(file) {
-					document.getElementById('fileList').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
+					document.getElementById('fileList').innerHTML += '<div id="' + file.id + '"  class="uploadedFileInfo">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
 				});
 			},
 
 			UploadProgress: function(up, file) {
-				document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+				document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span style="color: ' + (file.percent === 100 ? 'green' : 'yellow') + ';">' + file.percent + "%</span>";
 			},
 
 			Error: function(up, err) {
