@@ -7,10 +7,13 @@
 	header("Pragma: no-cache");
 
 	$targetDir = 'uploads';
+	$cleanupTargetDir = true; 
+	$maxFileAge = 44000;
 
 	if (!file_exists($targetDir)) {
 		@mkdir($targetDir);
 	}
+
 
 	if (isset($_REQUEST["name"])) {
 		$fileName = $_REQUEST["name"];
@@ -19,15 +22,32 @@
 	} else {
 		$fileName = uniqid("file_");
 	}
+
+	$filePath = $targetDir . DIRECTORY_SEPARATOR . $fileName;
+
 	
-
-	$currentDate = new DateTime("now", new DateTimeZone('Europe/Berlin'));
-	$currentDate->setTimestamp(time());
-
-	$filePath = $targetDir . DIRECTORY_SEPARATOR . $currentDate->format('Y-m-d-H-i-s_') . $fileName;
-
 	$chunk = isset($_REQUEST["chunk"]) ? intval($_REQUEST["chunk"]) : 0;
 	$chunks = isset($_REQUEST["chunks"]) ? intval($_REQUEST["chunks"]) : 0;
+
+
+	if ($cleanupTargetDir) {
+		if (!is_dir($targetDir) || !$dir = opendir($targetDir)) {
+			die('{"jsonrpc" : "2.0", "error" : {"code": 100, "message": "Failed to open temp directory."}, "id" : "id"}');
+		}
+
+		while (($file = readdir($dir)) !== false) {
+			$tmpfilePath = $targetDir . DIRECTORY_SEPARATOR . $file;
+
+			if ($tmpfilePath == "{$filePath}.part") {
+				continue;
+			}
+
+			if (preg_match('/\.part$/', $file) && (filemtime($tmpfilePath) < time() - $maxFileAge)) {
+				@unlink($tmpfilePath);
+			}
+		}
+		closedir($dir);
+	}	
 
 
 	if (!$out = @fopen("{$filePath}.part", $chunks ? "ab" : "wb")) {
@@ -48,7 +68,7 @@
 		}
 	}
 
-	while ($buff = fread($in, 102400)) {
+	while ($buff = fread($in, 10240000)) {
 		fwrite($out, $buff);
 	}
 
@@ -60,5 +80,5 @@
 	}
 
 	die('{"jsonrpc" : "2.0", "result" : null, "id" : "id"}');
-	
+
 ?>
