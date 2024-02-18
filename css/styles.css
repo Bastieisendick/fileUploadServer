@@ -1,28 +1,101 @@
+:root {
+	--normalblue: rgb(80,140,255);
+	--normalgreen: rgb(188, 247, 51);
+}
+
 body {
-	font: 13px Verdana;
-	background: #eee;
-	color: #333
+    display: inline-block;
+    margin: 0px auto;
+    text-align: center;
+	background-color: rgb(24, 23, 23);
 }
 
 .heading {
 	font-family: "Arial";
 	font-size: 7rem;
-	color: rgb(80,140,255);
-	align-items: center;
-	position: relative;
+	color: var(--normalblue);
+	text-decoration-line: underline;
+    text-decoration-thickness: auto;
+	margin-bottom: 1rem;
+}
+
+.infoText{
+	font-family: "Arial";
+	font-size: 2rem;
+	color: var(--normalblue);
+	margin-bottom: 10rem;
+}
+
+.uploadedFileInfo {
+	font-family: "Arial";
+	color: var(--normalblue);
 }
 
 .uploadButtonClass {
-	font-size: 3rem;
-	border-radius: 7px;
-	border-color: rgb(40,250,60);
+	margin-top: 2rem;
+	font-size: 12rem;
+	border-radius: 70px;
+	border-color: var(--normalgreen);
 	margin-bottom: 4rem;
+	background-color: var(--normalblue);
+	color: var(--normalgreen);
+	width: 90vw;
+	cursor: pointer;
+}
+
+.uploadButtonClass:active{
+	opacity: 0.5;
 }
 
 .startUploadButtonClass {
+	font-size: 12rem;
+	border-radius: 70px;
+	border-color: var(--normalgreen);
+	margin-bottom: 3rem;
+	background-color: var(--normalblue);
+	width: 90vw;
+	color: var(--normalgreen);
+	cursor: pointer;
+}
+
+.startUploadButtonClass:active{
+	opacity: 0.5;
+}
+
+
+
+.returnMainpageButton {
+	border-radius: 30px;
+	background-color: var(--normalblue);
+	color: var(--normalgreen);
 	font-size: 3rem;
-	color: rgb(40,250,60);
-	border-radius: 7px;
-	border-color: rgb(40,250,60);
-	background-color: rgb(80,140,255);
+	padding: 30px;
+	transition: all 0.5s;
+	cursor: pointer;
+	margin-bottom: 5rem;
+}
+  
+.returnMainpageButton span {
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	transition: 0.5s;
+}
+  
+.returnMainpageButton span:after {
+	content: '\00AB';
+	position: absolute;
+	opacity: 0;
+	top: 0;
+	left: -20px;
+	transition: 0.5s;
+}
+  
+  .returnMainpageButton:hover span {
+	padding-left: 25px;
+}
+  
+  .returnMainpageButton:hover span:after {
+	opacity: 1;
+	left: 0;
 }
