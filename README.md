@@ -5,7 +5,7 @@ This is an easy to use File Upload Server using Plupload.
 1. Donwload and extract the newest Plupload version directly into the plupload folder
 2. Get a Webserver with PHP installed (I used an Apache server with a PHP plugin on Windows)
 3. Change the upload path in fileUpload.php to your preferred destination
-4. Generate icons with https://www.favicon-generator.org/ and extract them into icons/ folder (Can also be done manually)
+4. Generate icons with [Favicon Generator by Dan's Tools](https://www.favicon-generator.org/) and extract them into icons/ folder (Can also be done manually)
 5. Change main page IP/URL in index.html to match with your main page (you can remove the button if you dont have one)
 6. Relocate your source code onto the Web server
 7. Open the website and enjoy!
